@@ -3,14 +3,23 @@ require 'uri'
 
 module HomeAutomation
   module Router
-    def self.attached_mac_addresses
-       uri = URI.parse("http://www.routerlogin.com/DEV_device.htm")
-       http = Net::HTTP.new(uri.host, uri.port)
-       request = Net::HTTP::Get.new(uri.request_uri)
-       request.basic_auth(Rails.application.secrets.router_username, Rails.application.secrets.router_password)
-       response = http.request(request)
+    def self.get_page path
+      uri = URI.parse("http://www.routerlogin.com/#{path}")
+      http = Net::HTTP.new(uri.host, uri.port)
+      request = Net::HTTP::Get.new(uri.request_uri)
+      request.basic_auth(Rails.application.secrets.router_username, Rails.application.secrets.router_password)
+      response = http.request(request)
+      response.body
+    end
 
-       response.body.scan /(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}/
+    def self.get_page_and_log_out path
+      body = get_page path
+      get_page 'LGO_logout.htm'
+      body
+    end
+
+    def self.attached_mac_addresses
+       get_page_and_log_out('DEV_device.htm').scan /(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}/
     end
   end
 end
