@@ -10,8 +10,7 @@ module HomeAutomation
        request.basic_auth(Rails.application.secrets.router_username, Rails.application.secrets.router_password)
        response = http.request(request)
 
-       macs = response.body.scan /(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}/
-       return macs
+       response.body.scan /(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}/
     end
   end
 end
