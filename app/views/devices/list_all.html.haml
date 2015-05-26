@@ -1,0 +1,17 @@
+%h1 All devices
+
+%table.table
+  %thead
+    %tr
+      %th MAC address
+      %th Owner
+      %th Name
+      %th Last seen
+  %tbody
+    - @devices.each do |device|
+      %tr
+        %td= device.mac_address_s
+        %td= device.user.uid rescue nil
+        %td= device.name
+        %td= device.last_seen_at
+

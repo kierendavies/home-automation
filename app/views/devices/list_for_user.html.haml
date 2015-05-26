@@ -1,16 +1,15 @@
-- if params[:uid]
-  %h1= "#{params[:uid].capitalize}'s devices"
-- else
-  %h1 All devices
+%h1= "#{params[:uid].capitalize}'s devices"
 
 %table.table
   %thead
     %tr
-      %td MAC address
-      %td Name
+      %th MAC address
+      %th Name
+      %th Last seen
   %tbody
     - @devices.each do |device|
       %tr
         %td= device.mac_address_s
         %td= device.name
+        %td= device.last_seen_at
 
