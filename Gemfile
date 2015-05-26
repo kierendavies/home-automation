@@ -29,6 +29,8 @@ gem "twitter-bootstrap-rails"
 gem 'devise'
 gem 'devise_ldap_authenticatable'
 
+gem 'rufus-scheduler'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
