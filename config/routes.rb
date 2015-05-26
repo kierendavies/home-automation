@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'dashboard#index'
 
+  get 'devices' => 'devices#list'
+  get 'devices/:uid' => 'devices#list'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,0 +1,16 @@
+- if params[:uid]
+  %h1= "#{params[:uid].capitalize}'s devices"
+- else
+  %h1 All devices
+
+%table.table
+  %thead
+    %tr
+      %td MAC address
+      %td Name
+  %tbody
+    - @devices.each do |device|
+      %tr
+        %td= device.mac_address_s
+        %td= device.name
+
