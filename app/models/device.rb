@@ -1,4 +1,4 @@
-require 'home_automation/router'
+require_dependency 'home_automation/router'
 
 class Device < ActiveRecord::Base
   belongs_to :user
