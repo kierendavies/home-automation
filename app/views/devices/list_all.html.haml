@@ -13,5 +13,5 @@
         %td= device.mac_address_s
         %td= device.user.uid rescue nil
         %td= device.name
-        %td= device.last_seen_at
+        %td= time_ago_in_words device.last_seen_at
 

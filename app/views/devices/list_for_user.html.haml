@@ -11,5 +11,5 @@
       %tr
         %td= device.mac_address_s
         %td= device.name
-        %td= device.last_seen_at
+        %td= time_ago_in_words device.last_seen_at
 
