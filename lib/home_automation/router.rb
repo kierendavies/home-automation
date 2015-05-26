@@ -22,7 +22,7 @@ module HomeAutomation
     end
 
     def self.mac_address_i_to_s address
-      5.downto(0).map {|i| ((address >> i * 8) % 256).to_s(16)}.join(':').upcase
+      5.downto(0).map {|i| ((address >> i * 8) % 256).to_s(16).rjust(2, '0')}.join(':').upcase
     end
 
     def self.get_page path
