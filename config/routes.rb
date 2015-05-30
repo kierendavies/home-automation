@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'dashboard#index'
 
-  get 'devices' => 'devices#list_all'
-  get 'devices/:uid' => 'devices#list_for_user'
+  get 'devices', to: 'devices#list_all', as: 'all_devices'
+  get 'devices/:uid', to: 'devices#list_for_user', as: 'user_devices'
+  post 'devices', to: 'devices#update', as: 'update_device'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

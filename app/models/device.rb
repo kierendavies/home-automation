@@ -15,4 +15,8 @@ class Device < ActiveRecord::Base
   def mac_address_s
     HomeAutomation::Router.mac_address_i_to_s mac_address
   end
+
+  def mac_address_s= address
+    mac_address = HomeAutomation::Router.mac_address_s_to_i address
+  end
 end

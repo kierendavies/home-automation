@@ -1,17 +1,22 @@
 %h1 All devices
 
-%table.table
-  %thead
-    %tr
-      %th MAC address
-      %th Owner
-      %th Name
-      %th Last seen
-  %tbody
-    - @devices.each do |device|
+= form_tag update_device_path, method: :post, id: 'form-update' do
+  %table.table
+    %thead
       %tr
-        %td= device.mac_address_s
-        %td= device.user.uid rescue nil
-        %td= device.name
-        %td= time_ago_in_words device.last_seen_at
+        %th MAC address
+        %th Owner
+        %th Name
+        %th Last seen
+        %th
+    %tbody
+      - @devices.each do |device|
+        %tr[device]
+          %td.mac-address= device.mac_address_s
+          %td.owner= device.user.uid rescue nil
+          %td.name= device.name
+          %td.last-seen= time_ago_in_words device.last_seen_at
+          %td.buttons
+            = link_to 'javascript:void(0);', onclick: "editDevice(#{device.id})" do
+              %span.glyphicon.glyphicon-edit
 
