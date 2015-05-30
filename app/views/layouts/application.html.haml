@@ -1,12 +1,32 @@
-!!!
-%html
+!!! 5
+%html(lang='en')
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title HomeAutomation
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %meta(charset='utf-8')
+    %meta(http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1')
+    %meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    %title= content_for?(:title) ? yield(:title) : 'HomeAutomation'
     = csrf_meta_tags
+    = stylesheet_link_tag 'application', :media => 'all'
+    = javascript_include_tag 'application'
+
   %body
-    %p.notice= notice
-    %p.alert= alert
-    = yield
+    - if user_signed_in?
+      .navbar.navbar-default.navbar-static-top
+        .container
+          %button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-responsive-collapse')
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand(href='#') HomeAutomation
+          .navbar-collapse.collapse.navbar-responsive-collapse
+            %ul.nav.navbar-nav
+              %li= link_to 'Dashboard', '/'
+              %li= link_to 'All devices', all_devices_path
+              %li= link_to 'My devices', user_devices_path(current_user.uid)
+
+    .container
+      .row
+        .col-lg-12
+          = bootstrap_flash
+          = yield
+
