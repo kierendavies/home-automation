@@ -20,7 +20,7 @@
           %a.navbar-brand(href='#') HomeAutomation
           .navbar-collapse.collapse.navbar-responsive-collapse
             %ul.nav.navbar-nav
-              %li= link_to 'Dashboard', '/'
+              %li= link_to 'Dashboard', root_path
               %li= link_to 'All devices', all_devices_path
               %li= link_to 'My devices', user_devices_path(current_user.uid)
 
