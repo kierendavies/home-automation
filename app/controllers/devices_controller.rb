@@ -17,17 +17,12 @@ class DevicesController < ApplicationController
       device.mac_address_s = params[:mac_address]
     end
 
-    owner = params[:owner] || params[:uid]
-    device.user = owner ? User.find_by!(uid: owner) : nil
+    device.user = params[:owner] ? User.find_by!(uid: params[:owner]) : nil
 
     device.name = params[:name]
 
     device.save!
 
-    if params[:uid]
-      redirect_to user_devices_path(params[:uid])
-    else
-      redirect_to all_devices_path
-    end
+    redirect_to :back
   end
 end

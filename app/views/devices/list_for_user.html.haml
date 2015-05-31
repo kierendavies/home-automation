@@ -1,7 +1,7 @@
 %h1= "#{params[:uid].capitalize}'s devices"
 
 = form_tag update_device_path, method: :post, id: 'form-update' do
-  = hidden_field_tag :uid, params[:uid]
+  = hidden_field_tag :owner, params[:uid]
   %table.table
     %thead
       %tr
