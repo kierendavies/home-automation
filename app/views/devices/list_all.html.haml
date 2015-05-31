@@ -13,7 +13,7 @@
       - @devices.each do |device|
         %tr[device]
           %td.mac-address= device.mac_address_s
-          %td.owner= device.user.uid rescue nil
+          %td.owner= link_to device.user.uid, user_devices_path(device.user.uid) rescue nil
           %td.name= device.name
           %td.last-seen= time_ago_in_words device.last_seen_at
           %td.buttons
