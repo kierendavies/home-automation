@@ -17,11 +17,13 @@ class DevicesController < ApplicationController
       device.mac_address_s = params[:mac_address]
     end
 
-    device.user = params[:owner] ? User.find_by!(uid: params[:owner]) : nil
-
-    device.name = params[:name]
-
-    device.save!
+    begin
+      device.user = (params[:owner].nil? || params[:owner].empty?) ? nil : User.find_by!(uid: params[:owner])
+      device.name = params[:name]
+      device.save!
+    rescue => e
+      flash[:error] = e.message
+    end
 
     redirect_to :back
   end
