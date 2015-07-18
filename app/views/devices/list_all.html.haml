@@ -1,26 +1,3 @@
 %h1 All devices
 
-= form_tag update_device_path, method: :post, id: 'form-update' do
-  %table.table
-    %thead
-      %tr
-        %th MAC address
-        %th Owner
-        %th Name
-        %th Mobile
-        %th Last seen
-        %th
-    %tbody
-      - @devices.each do |device|
-        %tr[device]
-          %td.mac-address= device.mac_address_s
-          %td.owner= link_to device.user.uid, user_devices_path(device.user.uid) rescue nil
-          %td.name= device.name
-          %td.mobile
-            - if device.mobile
-              %span.glyphicon.glyphicon-ok
-          %td.last-seen= time_ago_in_words device.last_seen_at
-          %td.buttons
-            = link_to 'javascript:void(0);', onclick: "editDevice(#{device.id})" do
-              %span.glyphicon.glyphicon-edit
-
+= render partial: "list", locals: {devices: @devices, for_user: nil}

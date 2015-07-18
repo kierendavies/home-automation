@@ -2,11 +2,12 @@ class DevicesController < ApplicationController
   before_filter :authenticate_user!
 
   def list_all
-    @devices = Device.order(last_seen_at: :desc)
+    @devices = Device.all.order(last_seen_at: :desc)
   end
 
   def list_for_user
-    @devices = User.find_by!(uid: params[:uid]).devices.order(last_seen_at: :desc)
+    @user = User.find_by!(uid: params[:uid])
+    @devices = @user.devices.order(last_seen_at: :desc)
   end
 
   def update
