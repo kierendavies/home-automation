@@ -1,5 +1,20 @@
-%h1 Dashboard
-%p
-  Coming soon!  For now, see
-  = link_to 'devices', all_devices_path
+%h2 Who's home
+
+.row
+  - @users.each do |user|
+    .col-sm-4
+      .panel{class: user.at_home? ? :"panel-success" : :"panel-danger"}
+        .panel-heading
+          %h3.panel-title= user.uid
+        .panel-body
+          - if user.mobile_devices.empty?
+            %p No mobile devices
+          - else
+            %ul.list-unstyled
+              - user.mobile_devices.each do |device|
+                %li
+                  %strong= device.name
+                  seen
+                  = time_ago_in_words device.last_seen_at
+                  ago
 
