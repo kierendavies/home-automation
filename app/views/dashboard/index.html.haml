@@ -4,8 +4,11 @@
   - @users.each do |user|
     .col-sm-4
       .panel{class: user.at_home? ? :"panel-success" : :"panel-danger"}
-        .panel-heading
-          %h3.panel-title= user.uid
+        .panel-heading.clearfix
+          %h3.panel-title.pull-left= user.uid
+          .btn-group.btn-group-xs.pull-right
+            %a.btn.btn-default.button-xs{href: user_devices_path(user.uid)}
+              %span.glyphicon.glyphicon-list
         .panel-body
           - if user.mobile_devices.empty?
             %p No mobile devices
