@@ -10,6 +10,8 @@
     owner.html("<input type='text' name='owner' value='" + owner.text() + "' />")
   name = row.children(".name")
   name.html("<input type='text' name='name' value='" + name.text() + "' />")
+  mobile = row.children(".mobile")
+  mobile.html("<input type='checkbox' name='mobile'/>")
   buttons = row.children(".buttons")
   buttons.html("<a href='javascript:void(0);' onclick='submitUpdate()'><span class='glyphicon glyphicon-ok' /></a>")
 

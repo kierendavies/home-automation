@@ -20,6 +20,7 @@ class DevicesController < ApplicationController
     begin
       device.user = (params[:owner].nil? || params[:owner].empty?) ? nil : User.find_by!(uid: params[:owner])
       device.name = params[:name]
+      device.mobile = params[:mobile]
       device.save!
     rescue => e
       flash[:error] = e.message

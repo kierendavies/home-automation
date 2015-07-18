@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526172906) do
+ActiveRecord::Schema.define(version: 20150718120104) do
 
   create_table "devices", force: :cascade do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150526172906) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.datetime "last_seen_at"
+    t.boolean  "mobile"
   end
 
   add_index "devices", ["mac_address"], name: "index_devices_on_mac_address", unique: true

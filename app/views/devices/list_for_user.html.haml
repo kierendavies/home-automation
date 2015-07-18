@@ -7,6 +7,7 @@
       %tr
         %th MAC address
         %th Name
+        %th Mobile
         %th Last seen
         %th
     %tbody
@@ -14,6 +15,9 @@
         %tr[device]
           %td.mac-address= device.mac_address_s
           %td.name= device.name
+          %td.mobile
+            - if device.mobile
+              %span.glyphicon.glyphicon-ok
           %td.last-seen= time_ago_in_words device.last_seen_at
           %td.buttons
             = link_to 'javascript:void(0);', onclick: "editDevice(#{device.id})" do
