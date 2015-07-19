@@ -40,7 +40,7 @@
 
   = form_tag update_device_path, method: :post, id: 'form-update-device' do
     = hidden_field_tag :id
-    = hidden_field_tag :owner, for_user
+    = hidden_field_tag :owner, for_user.uid
     = hidden_field_tag :name
     = hidden_field_tag :mobile
 

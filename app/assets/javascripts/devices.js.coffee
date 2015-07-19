@@ -23,7 +23,9 @@ class DeviceListBehaviour
     device = $(event.target).closest(".device")
     form = $("form#form-update-device")
     form.find("#id").val(device.data("id"))
-    form.find("#owner").val(device.find("input[name='owner']").val())
+    owner = device.find("input[name='owner']")
+    if owner.length
+      form.find("#owner").val(owner.val())
     form.find("#name").val(device.find("input[name='name']").val())
     form.find("#mobile").val(device.find("input[name='mobile']").prop("checked"))
     form.submit()
