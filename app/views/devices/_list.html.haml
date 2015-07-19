@@ -1,6 +1,4 @@
-= form_tag update_device_path, method: :post, id: 'form-update' do
-  - if for_user
-    = hidden_field_tag :owner, for_user
+#devices
   %table.table
     %thead
       %tr
@@ -13,18 +11,36 @@
         %th
     %tbody
       - devices.each do |device|
-        %tr[device]
-          %td.mac-address= device.mac_address_s
+        %tr.device[device]{data: {id: device.id}}
+          %td.mac-address
+            = device.mac_address_s
           - if for_user.nil?
             %td.owner
               - unless device.user.nil?
-                = link_to device.user.uid, user_devices_path(device.user.uid)
-          %td.name= device.name
+                %a.edit-hide{href: user_devices_path(device.user.uid)}= device.user.uid
+              %input.form-control.edit-show{type: :text, name: :owner, value: (device.user.nil? ? nil : device.user.uid)}
+          %td.name
+            .edit-hide= device.name
+            %input.form-control.edit-show{type: :text, name: :name, value: device.name}
           %td.mobile
             - if device.mobile
-              %span.glyphicon.glyphicon-ok
+              %span.glyphicon.glyphicon-ok.edit-hide
+            %input.form-control.edit-show{type: :checkbox, name: :mobile, checked: device.mobile}
           %td.last-seen= time_ago_in_words device.last_seen_at
           %td.buttons
-            = link_to 'javascript:void(0);', onclick: "editDevice(#{device.id})" do
-              %span.glyphicon.glyphicon-edit
+            .btn-toolbar
+              .btn-group.btn-group-xs
+                %button.btn.btn-default.device-edit.edit-hide
+                  %span.glyphicon.glyphicon-edit
+              .btn-group.btn-group-xs
+                %button.btn.btn-default.device-submit.edit-show
+                  %span.glyphicon.glyphicon-ok
+                %button.btn.btn-default.device-cancel.edit-show
+                  %span.glyphicon.glyphicon-remove
+
+  = form_tag update_device_path, method: :post, id: 'form-update-device' do
+    = hidden_field_tag :id
+    = hidden_field_tag :owner, for_user
+    = hidden_field_tag :name
+    = hidden_field_tag :mobile
 
