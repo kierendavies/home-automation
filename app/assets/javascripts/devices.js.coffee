@@ -23,7 +23,7 @@ class DeviceListBehaviour
     device = $(event.target).closest(".device")
     form = $("form#form-update-device")
     form.find("#id").val(device.data("id"))
-    owner = device.find("input[name='owner']")
+    owner = device.find("select[name='owner']")
     if owner.length
       form.find("#owner").val(owner.val())
     form.find("#name").val(device.find("input[name='name']").val())

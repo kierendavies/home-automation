@@ -18,7 +18,9 @@
             %td.owner
               - unless device.user.nil?
                 %a.edit-hide{href: user_devices_path(device.user.uid)}= device.user.uid
-              %input.form-control.edit-show{type: :text, name: :owner, value: (device.user.nil? ? nil : device.user.uid)}
+              %select.form-control.edit-show{name: :owner}
+                %option{value: ""} nobody
+                = options_from_collection_for_select @users, :uid, :uid, device.user.nil? ? nil : device.user.uid
           %td.name
             .edit-hide= device.name
             %input.form-control.edit-show{type: :text, name: :name, value: device.name}
@@ -28,19 +30,18 @@
             %input.form-control.edit-show{type: :checkbox, name: :mobile, checked: device.mobile}
           %td.last-seen= time_ago_in_words device.last_seen_at
           %td.buttons
-            .btn-toolbar
-              .btn-group.btn-group-xs
-                %button.btn.btn-default.device-edit.edit-hide
-                  %span.glyphicon.glyphicon-edit
-              .btn-group.btn-group-xs
-                %button.btn.btn-default.device-submit.edit-show
-                  %span.glyphicon.glyphicon-ok
-                %button.btn.btn-default.device-cancel.edit-show
-                  %span.glyphicon.glyphicon-remove
+            .btn-group.btn-group-xs.edit-hide
+              %button.btn.btn-default.device-edit
+                %span.glyphicon.glyphicon-edit
+            .btn-group.btn-group-xs.edit-show
+              %button.btn.btn-default.device-submit
+                %span.glyphicon.glyphicon-ok
+              %button.btn.btn-default.device-cancel
+                %span.glyphicon.glyphicon-remove
 
   = form_tag update_device_path, method: :post, id: 'form-update-device' do
     = hidden_field_tag :id
-    = hidden_field_tag :owner, for_user.uid
+    = hidden_field_tag :owner, for_user.nil? ? "" : for_user.uid
     = hidden_field_tag :name
     = hidden_field_tag :mobile
 
